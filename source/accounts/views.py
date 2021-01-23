@@ -92,4 +92,5 @@ class UserListView(LoginRequiredMixin, ListView):
     template_name = 'user_list.html'
     model = get_user_model()
     context_object_name = 'user_list'
+    paginate_by = 5
     ordering = ['-id']

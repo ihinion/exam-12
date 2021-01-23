@@ -6,6 +6,9 @@
     {% for user_obj in user_list %}
         {% include 'partial/user_card.html' %}
     {% endfor %}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
 {% endblock %}
 {% block scripts %}
     <script src="{% static 'js/friends.js' %}"></script>
