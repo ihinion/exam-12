@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Message{% endblock %}
+{% block content %}
+<div class="card bg-light mb-5">
+    <div class="card-body">
+            <p><b>From:</b> <a href="{% url 'accounts:detail' message.sender.pk %}">{{ message.sender.username }}</a><br>
+            <p><b>To:</b> <a href="{% url 'accounts:detail' message.receiver.pk %}">{{ message.receiver.username }}</a><br>
+            <p><b>Time: </b> {{ message.created_at }}<br></p>
+            <p style="white-space:pre-line"><b>Text:</b> {{ message.text }}<br>
+            <a class="btn btn-success btn-sm mt-3" href="{% url 'webapp:message_box' %}">Messenger</a>
+    </div>
+</div>
+{% endblock %}

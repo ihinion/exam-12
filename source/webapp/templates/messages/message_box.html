@@ -2,5 +2,5 @@
 {% block title %}Messages{% endblock %}
 {% block content %}
     <a class="btn btn-warning btn-lg btn-block my-5" href="{% url 'webapp:messages_incoming' %}">Incoming messages</a>
-    <a class="btn btn-danger btn-lg btn-block" href="">Outcoming messages</a>
+    <a class="btn btn-danger btn-lg btn-block" href="{% url 'webapp:messages_outcoming' %}">Outcoming messages</a>
 {% endblock %}

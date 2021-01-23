@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-{% block title %}Incoming messages{% endblock %}
+{% block title %}Outcoming messages{% endblock %}
 {% block content %}
-    <h2 class="my-3 text-md-center">Incoming messages</h2>
+    <h2 class="my-3 text-md-center">Outcoming messages</h2>
     {% if not messages %}
-        <h3 class="my-3 text-center">You haven't received any messages yet</h3>
+        <h3 class="my-3 text-center">You haven't sent any messages yet</h3>
     {% endif %}
     {% for message in messages %}
-        {% include 'partial/message_card.html' with is_receiver=True %}
+        {% include 'partial/message_card.html' with is_sender=True %}
     {% endfor %}
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}

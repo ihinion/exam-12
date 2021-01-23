@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, get_object_or_404
-from django.views.generic import CreateView, TemplateView, ListView
+from django.views.generic import CreateView, TemplateView, ListView, DetailView
 from webapp.forms import MessageForm
 from webapp.models import Message
 
@@ -44,3 +44,21 @@ class IncomingMessagesListView(LoginRequiredMixin, ListView):
         queryset = super(IncomingMessagesListView, self).get_queryset()
         queryset = queryset.filter(receiver=self.request.user)
         return queryset
+
+
+class OutcomingMessagesListView(LoginRequiredMixin, ListView):
+    template_name = 'messages/message_outbox.html'
+    model = Message
+    context_object_name = 'messages'
+    paginate_by = 5
+    ordering = ['-id']
+
+    def get_queryset(self):
+        queryset = super(OutcomingMessagesListView, self).get_queryset()
+        queryset = queryset.filter(sender=self.request.user)
+        return queryset
+
+
+class MessageDetailView(LoginRequiredMixin, DetailView):
+    template_name = 'messages/message_detail.html'
+    model = Message

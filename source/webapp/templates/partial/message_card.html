@@ -8,10 +8,6 @@
             <p><b>Receiver:</b> <a href="{% url 'accounts:detail' message.receiver.pk %}">{{ message.receiver.username }}</a><br>
             <p><b>Sent:</b> {{ message.created_at }}<br>
         {% endif %}
-        {% if is_detail == True %}
-            <p><b>Text:</b> {{ message.text }}<br>
-        {% else %}
-            <a class="btn btn-success btn-sm mt-3" href="">View message</a>
-        {% endif %}
+        <a class="btn btn-success btn-sm mt-3" href="{% url 'webapp:message_detail' message.pk %}">View message</a>
     </div>
 </div>
