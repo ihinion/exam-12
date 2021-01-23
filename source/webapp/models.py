@@ -14,3 +14,4 @@ class Message(models.Model):
                                on_delete=models.CASCADE)
     receiver = models.ForeignKey(get_user_model(), verbose_name='Receiver', on_delete=models.CASCADE)
     text = models.TextField(max_length=500, verbose_name='Text')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created at')

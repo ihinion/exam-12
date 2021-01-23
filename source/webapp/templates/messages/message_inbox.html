@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Incoming messages{% endblock %}
+{% block content %}
+    <h2 class="my-3 text-md-center">Incoming messages</h2>
+    {% for message in messages %}
+        {% include 'partial/message_card.html' with is_receiver=True %}
+    {% endfor %}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+{% endblock %}
