@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load friends %}
 <div class="card bg-light mb-5">
     <div class="card-body">
     <div class="media">
@@ -11,8 +12,12 @@
             <p><b>User:</b> <a href="{% url 'accounts:detail' user_obj.pk %}">{{ user_obj.username }}</a> <br>
             <p><b>Name:</b> {{ user_obj.first_name }}<br>
             <p><b>Last name:</b> {{ user_obj.last_name }}<br>
-            <p><a class="btn btn-success btn-sm" href="#">Add friend</a></p>
-            <p><a class="hidden btn btn-success btn-sm" href="#">Unfriend</a></p>
+            {% if user.is_authenticated and user != user_obj %}
+                {% with user_obj|is_friend:user as is_friend %}
+                    <a class="{% if is_friend %}hidden{% endif %} add-friend btn btn-success btn-sm" href="{% url 'api:addfriend' user_obj.pk %}">Add friend</a>
+                    <a class="{% if not is_friend %}hidden{% endif %} un-friend btn btn-success btn-sm" href="{% url 'api:unfriend' user_obj.pk %}">Unfriend</a>
+                {% endwith %}
+            {% endif %}
         </div>
     </div>
     </div>
