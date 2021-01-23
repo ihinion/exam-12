@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.contrib.auth import login, get_user_model, update_session_auth_hash
 from django.urls import reverse
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, ListView
 from accounts.forms import MyUserCreationForm, UserChangeForm, ProfileChangeForm, PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from accounts.models import Profile
@@ -86,3 +86,10 @@ class UserPasswordChangeView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('accounts:detail', kwargs={'pk': self.object.pk})
+
+
+class UserListView(LoginRequiredMixin, ListView):
+    template_name = 'user_list.html'
+    model = get_user_model()
+    context_object_name = 'user_list'
+    ordering = ['-id']

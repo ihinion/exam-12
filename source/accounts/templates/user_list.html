@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}User list{% endblock %}
+{% block content %}
+    <h2 class="my-3 text-md-center" id="user-list-headline">User list</h2>
+    {% for user_obj in user_list %}
+        {% include 'partial/user_card.html' %}
+    {% endfor %}
+{% endblock %}

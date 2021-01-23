@@ -1,0 +1,19 @@
+{% load staticfiles %}
+<div class="card bg-light mb-5">
+    <div class="card-body">
+    <div class="media">
+        {% if user_obj.profile.profile_pic %}
+            <img src="{{ user_obj.profile.profile_pic.url }}" class="align-self-start mr-3" width="200" height="auto" alt="photo">
+        {% else %}
+            <img src="{% static 'no_avatar.jpg' %}" class="align-self-start mr-3" width="200" height="auto" alt="photo">
+        {% endif %}
+        <div class="media-body">
+            <p><b>User:</b> <a href="{% url 'accounts:detail' user_obj.pk %}">{{ user_obj.username }}</a> <br>
+            <p><b>Name:</b> {{ user_obj.first_name }}<br>
+            <p><b>Last name:</b> {{ user_obj.last_name }}<br>
+            <p><a class="btn btn-success btn-sm" href="#">Add friend</a></p>
+            <p><a class="hidden btn btn-success btn-sm" href="#">Unfriend</a></p>
+        </div>
+    </div>
+    </div>
+</div>
