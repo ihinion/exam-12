@@ -88,7 +88,7 @@ class UserPasswordChangeView(LoginRequiredMixin, UpdateView):
         return reverse('accounts:detail', kwargs={'pk': self.object.pk})
 
 
-class UserListView(LoginRequiredMixin, ListView):
+class UserListView(ListView):
     template_name = 'user_list.html'
     model = get_user_model()
     context_object_name = 'user_list'

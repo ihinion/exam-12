@@ -15,7 +15,7 @@
             {% if user.is_authenticated and user != user_obj %}
                 {% with user_obj|is_friend:user as is_friend %}
                     <a class="{% if is_friend %}hidden{% endif %} add-friend btn btn-success btn-sm mt-3" href="{% url 'api:addfriend' user_obj.pk %}">Add friend</a>
-                    <a class="{% if not is_friend %}hidden{% endif %} un-friend btn btn-success btn-sm mt-3" href="{% url 'api:unfriend' user_obj.pk %}">Unfriend</a>
+                    <a class="{% if not is_friend %}hidden{% endif %} un-friend btn btn-danger btn-sm mt-3" href="{% url 'api:unfriend' user_obj.pk %}">Unfriend</a>
                 {% endwith %}
             {% endif %}
         </div>

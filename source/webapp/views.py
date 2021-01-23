@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import CreateView, TemplateView, ListView, DetailView
 from webapp.forms import MessageForm
@@ -59,6 +59,9 @@ class OutcomingMessagesListView(LoginRequiredMixin, ListView):
         return queryset
 
 
-class MessageDetailView(LoginRequiredMixin, DetailView):
+class MessageDetailView(UserPassesTestMixin, DetailView):
     template_name = 'messages/message_detail.html'
     model = Message
+
+    def test_func(self):
+        return self.request.user == self.get_object().sender or self.request.user == self.get_object().receiver
