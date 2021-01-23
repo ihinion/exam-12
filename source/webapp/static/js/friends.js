@@ -12,9 +12,8 @@ async function onAddFriend(event) {
         console.log(error)
     }
     addFriendBtn.classList.add('hidden');
-    console.log('hidden')
-    const unFriendBtn = addFriendBtn.parentElement.getElementsByClassName('un-friend')[0];
-    console.log('no class')
+    const unFriendBtn = addFriendBtn.parentElement
+        .getElementsByClassName('un-friend')[0];
     unFriendBtn.classList.remove('hidden');
 }
 

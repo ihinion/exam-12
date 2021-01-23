@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
+{% load friends %}
 {% block title %}User page{% endblock %}
 
 {% block nav %}
@@ -21,10 +22,28 @@
             <img src="{% static 'no_avatar.jpg' %}" class="align-self-start mr-3" width="250" height="auto" alt="user picture">
         {% endif %}
         <div class="media-body">
-        <h5 class="mt-0">Page of {{ user_obj.get_first_name|default:user_obj.username }}</h5>
+        <h4 class="mt-0 mb-3">Page of {{ user_obj.get_first_name|default:user_obj.username }}</h4>
         <p>Username: {{ user_obj.username }}</p>
-        <p>Имя: </p>
-        <p>Фамилия: </p>
+        <p>Name: </p>
+        <p>Last name: </p>
+        {% if user.is_authenticated and user != user_obj %}
+            {% with user_obj|is_friend:user as is_friend %}
+                <a class="{% if is_friend %}hidden{% endif %} add-friend btn btn-success btn-sm mt-3" href="{% url 'api:addfriend' user_obj.pk %}">Add friend</a>
+                <a class="{% if not is_friend %}hidden{% endif %} un-friend btn btn-success btn-sm mt-3" href="{% url 'api:unfriend' user_obj.pk %}">Unfriend</a>
+            {% endwith %}
+        {% endif %}
         </div>
     </div>
+    <hr>
+    <h5 class="my-3">{{ user_obj.username }}'s friends:</h5>
+    {% if user_obj.friends.all %}
+        {% for friend in user_obj.friends.all %}
+            {% include 'partial/user_card.html' with user_obj=friend.target_user %}
+        {% endfor %}
+        {% else %}
+        <p>This user has no friends yet :/</p>
+    {% endif %}
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'js/friends.js' %}"></script>
 {% endblock %}
