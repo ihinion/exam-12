@@ -20,5 +20,8 @@
             {% endif %}
         </div>
     </div>
+    {% if user.is_authenticated and user != user_obj %}
+        <a class="btn btn-info btn-sm mt-3" href="{% url 'webapp:message_create' user_obj.pk %}">Send message</a>
+    {% endif %}
     </div>
 </div>

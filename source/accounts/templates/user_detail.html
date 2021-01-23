@@ -31,6 +31,7 @@
                 <a class="{% if is_friend %}hidden{% endif %} add-friend btn btn-success btn-sm mt-3" href="{% url 'api:addfriend' user_obj.pk %}">Add friend</a>
                 <a class="{% if not is_friend %}hidden{% endif %} un-friend btn btn-success btn-sm mt-3" href="{% url 'api:unfriend' user_obj.pk %}">Unfriend</a>
             {% endwith %}
+            <a class="btn btn-info btn-sm mt-3 ml-3" href="{% url 'webapp:message_create' user_obj.pk %}">Send message</a>
         {% endif %}
         </div>
     </div>

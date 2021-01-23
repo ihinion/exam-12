@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}New message{% endblock %}
+{% block content %}
+    <h1>New message</h1>
+    {% include 'partial/form.html' with button_text='Send' form_method='post' %}
+{% endblock %}

@@ -7,3 +7,10 @@ class Friend(models.Model):
                              on_delete=models.CASCADE)
     target_user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,
                                     verbose_name='Friend')
+
+
+class Message(models.Model):
+    sender = models.ForeignKey(get_user_model(), verbose_name='Sender', related_name='messages',
+                               on_delete=models.CASCADE)
+    receiver = models.ForeignKey(get_user_model(), verbose_name='Receiver', on_delete=models.CASCADE)
+    text = models.TextField(max_length=500, verbose_name='Text')
